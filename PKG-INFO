@@ -1,11 +1,11 @@
-Metadata-Version: 1.0
+Metadata-Version: 1.1
 Name: MultipartPostHandler2
-Version: 0.1.1
+Version: 0.1.2
 Summary: A handler for urllib2 to enable multipart form uploading
 Home-page: http://pipe.scs.fsu.edu/PostHandler/MultipartPostHandler.py
 Author: Sergio Basto
 Author-email: sergio@serjux.com
-License: UNKNOWN
+License: LGPLv2.1+
 Description: Usage:
           Enables the use of multipart/form-data for posting forms
           add a fix for utf-8 systems.

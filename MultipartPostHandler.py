@@ -1,8 +1,7 @@
-#!/usr/bin/python
 # From http://peerit.blogspot.com/2007/07/multipartposthandler-doesnt-work-for.html
 
 ####
-# 02/2006 Will Holcomb <wholcomb@gmail.com>
+# 2006/02 Will Holcomb <wholcomb@gmail.com>
 # 
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,8 +13,11 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
 #
-# 7/26/07 Slightly modified by Brian Schneider  
+# 2007/07 Slightly modified by Brian Schneider  
 # in order to support unicode files ( multipart_encode function )
+#
+# 2013/07 Ken Olum <kdo@cosmos.phy.tufts.edu>
+# Removed one of \r\n and send Content-Length
 """
 Usage:
   Enables the use of multipart/form-data for posting forms
@@ -35,10 +37,6 @@ Example:
   params = { "username" : "bob", "password" : "riviera",
              "file" : open("filename", "rb") }
   opener.open("http://wwww.bobsite.com/upload/", params)
-
-Further Example:
-  The main function of this file is a sample which downloads a page and
-  then uploads it to the W3C validator.
 """
 
 import urllib
@@ -102,36 +100,12 @@ class MultipartPostHandler(urllib2.BaseHandler):
             buffer.write('--%s\r\n' % boundary)
             buffer.write('Content-Disposition: form-data; name="%s"; filename="%s"\r\n' % (key, filename))
             buffer.write('Content-Type: %s\r\n' % contenttype)
-            # buffer += 'Content-Length: %s\r\n' % file_size
+            buffer.write('Content-Length: %s\r\n' % file_size)
             fd.seek(0)
             buffer.write('\r\n' + fd.read() + '\r\n')
-        buffer.write('--' + boundary + '--\r\n\r\n')
+        buffer.write('--' + boundary + '--\r\n')
         buffer = buffer.getvalue()
         return boundary, buffer
     multipart_encode = Callable(multipart_encode)
 
     https_request = http_request
-
-def main():
-    import tempfile, sys
-
-    validatorURL = "http://validator.w3.org/check"
-    opener = urllib2.build_opener(MultipartPostHandler)
-
-    def validateFile(url):
-        temp = tempfile.mkstemp(suffix=".html")
-        os.write(temp[0], opener.open(url).read())
-        params = { "ss" : "0",            # show source
-                   "doctype" : "Inline",
-                   "uploaded_file" : open(temp[1], "rb") }
-        print opener.open(validatorURL, params).read()
-        os.remove(temp[1])
-
-    if len(sys.argv[1:]) > 0:
-        for arg in sys.argv[1:]:
-            validateFile(arg)
-    else:
-        validateFile("http://www.google.com")
-
-if __name__=="__main__":
-    main()
