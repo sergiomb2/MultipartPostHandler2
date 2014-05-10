@@ -1,9 +1,0 @@
-MultipartPostHandler.py
-README.txt
-setup.cfg
-setup.py
-./MultipartPostHandler.py
-MultipartPostHandler2.egg-info/PKG-INFO
-MultipartPostHandler2.egg-info/SOURCES.txt
-MultipartPostHandler2.egg-info/dependency_links.txt
-MultipartPostHandler2.egg-info/top_level.txt

@@ -44,7 +44,7 @@ Further Example:
   The main function of this file is a sample which downloads a page and
   then uploads it to the W3C validator.
 """,
-    package_data = {'':['MultipartPostHandler-example.py']},
-    packages = find_packages()
+    include_package_data = True,
+    package_data = {'': ['examples/*.py']},
     )
 
