@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 setup(
     name = "MultipartPostHandler2",
     py_modules = ['MultipartPostHandler'],
-    version = "0.1.2",
+    version = "0.1.3",
     description = "A handler for urllib2 to enable multipart form uploading",
     license = "LGPLv2.1+",
     author = "Will Holcomb",
@@ -33,11 +33,9 @@ Inspirations:
     Fabien Seisen: <fabien@seisen.org>
 
 Example:
-  import MultipartPostHandler, urllib2, cookielib
+  import MultipartPostHandler, urllib2
 
-  cookies = cookielib.CookieJar()
-  opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookies),
-                                MultipartPostHandler.MultipartPostHandler)
+  opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
   params = { "username" : "bob", "password" : "riviera",
              "file" : open("filename", "rb") }
   opener.open("http://wwww.bobsite.com/upload/", params)
@@ -46,7 +44,7 @@ Further Example:
   The main function of this file is a sample which downloads a page and
   then uploads it to the W3C validator.
 """,
-    package_data = {'doc':['MultipartPostHandler.html']},
+    package_data = {'':['MultipartPostHandler-example.py']},
     packages = find_packages()
     )
 

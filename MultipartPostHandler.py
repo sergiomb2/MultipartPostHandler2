@@ -1,5 +1,3 @@
-# From http://peerit.blogspot.com/2007/07/multipartposthandler-doesnt-work-for.html
-
 ####
 # 2006/02 Will Holcomb <wholcomb@gmail.com>
 # 
@@ -13,11 +11,25 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Lesser General Public License for more details.
 #
-# 2007/07 Slightly modified by Brian Schneider  
+# 2007/07/26 Slightly modified by Brian Schneider  
+#
 # in order to support unicode files ( multipart_encode function )
+# From http://peerit.blogspot.com/2007/07/multipartposthandler-doesnt-work-for.html
 #
 # 2013/07 Ken Olum <kdo@cosmos.phy.tufts.edu>
+#
 # Removed one of \r\n and send Content-Length
+#
+# 2014/05 Applied Fedora rpm patch
+#
+# https://bugzilla.redhat.com/show_bug.cgi?id=920778
+# http://pkgs.fedoraproject.org/cgit/python-MultipartPostHandler2.git/diff/python-MultipartPostHandler2-cut-out-main.patch?id=c1638bb3e45596232b4d02f1e69901db0c28cfdb
+#
+# 2014/05/09 Sérgio Basto <sergio@serjux.com>
+#
+# Better deal with None values, don't throw an exception and just send an empty string.
+# Simplified text example
+#
 """
 Usage:
   Enables the use of multipart/form-data for posting forms
@@ -29,11 +41,9 @@ Inspirations:
     Fabien Seisen: <fabien@seisen.org>
 
 Example:
-  import MultipartPostHandler, urllib2, cookielib
+  import MultipartPostHandler, urllib2
 
-  cookies = cookielib.CookieJar()
-  opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookies),
-                                MultipartPostHandler.MultipartPostHandler)
+  opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
   params = { "username" : "bob", "password" : "riviera",
              "file" : open("filename", "rb") }
   opener.open("http://wwww.bobsite.com/upload/", params)
@@ -92,6 +102,8 @@ class MultipartPostHandler(urllib2.BaseHandler):
         for(key, value) in vars:
             buffer.write('--%s\r\n' % boundary)
             buffer.write('Content-Disposition: form-data; name="%s"' % key)
+            if value is None:
+                value = ""
             buffer.write('\r\n\r\n' + value + '\r\n')
         for(key, fd) in files:
             file_size = os.fstat(fd.fileno())[stat.ST_SIZE]
