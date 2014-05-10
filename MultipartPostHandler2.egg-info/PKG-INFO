@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: MultipartPostHandler2
-Version: 0.1.2
+Version: 0.1.3
 Summary: A handler for urllib2 to enable multipart form uploading
 Home-page: http://pipe.scs.fsu.edu/PostHandler/MultipartPostHandler.py
 Author: Sergio Basto
@@ -17,11 +17,9 @@ Description: Usage:
             Fabien Seisen: <fabien@seisen.org>
         
         Example:
-          import MultipartPostHandler, urllib2, cookielib
+          import MultipartPostHandler, urllib2
         
-          cookies = cookielib.CookieJar()
-          opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookies),
-                                        MultipartPostHandler.MultipartPostHandler)
+          opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
           params = { "username" : "bob", "password" : "riviera",
                      "file" : open("filename", "rb") }
           opener.open("http://wwww.bobsite.com/upload/", params)
