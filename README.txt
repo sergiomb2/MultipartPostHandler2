@@ -1,7 +1,7 @@
 MultipartPostHandler2
 =====================
 
-MultipartPostHandler2 for pyhton 2
+MultipartPostHandler for pyhton 2
 
 Usage:
   Enables the use of multipart/form-data for posting forms
