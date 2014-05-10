@@ -1,3 +1,8 @@
+MultipartPostHandler2
+=====================
+
+MultipartPostHandler2 for pyhton 2
+
 Usage:
   Enables the use of multipart/form-data for posting forms
 
@@ -8,11 +13,9 @@ Inspirations:
     Fabien Seisen: <fabien@seisen.org>
 
 Example:
-  import MultipartPostHandler, urllib2, cookielib
+  import MultipartPostHandler, urllib2
 
-  cookies = cookielib.CookieJar()
-  opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookies),
-                                MultipartPostHandler.MultipartPostHandler)
+  opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
   params = { "username" : "bob", "password" : "riviera",
              "file" : open("filename", "rb") }
   opener.open("http://wwww.bobsite.com/upload/", params)
