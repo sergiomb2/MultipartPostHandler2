@@ -2,14 +2,14 @@ from setuptools import setup, find_packages
 setup(
     name = "MultipartPostHandler2",
     py_modules = ['MultipartPostHandler'],
-    version = "0.1.3",
+    version = "0.1.4",
     description = "A handler for urllib2 to enable multipart form uploading",
     license = "LGPLv2.1+",
     author = "Will Holcomb",
     author_email = "wholcomb@gmail.com",
     maintainer = "Sergio Basto",
     maintainer_email = "sergio@serjux.com", 
-    url = "http://pipe.scs.fsu.edu/PostHandler/MultipartPostHandler.py",
+    url = "https://github.com/sergiomb2/MultipartPostHandler2/",
     keywords = ["http", "multipart", "post", "urllib2"],
     classifiers = [
         "Programming Language :: Python",
@@ -44,7 +44,5 @@ Further Example:
   The main function of this file is a sample which downloads a page and
   then uploads it to the W3C validator.
 """,
-    include_package_data = True,
-    package_data = {'': ['examples/*.py']},
     )
 
