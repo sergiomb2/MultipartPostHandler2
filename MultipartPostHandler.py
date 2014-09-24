@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+#
 ####
 # 2006/02 Will Holcomb <wholcomb@gmail.com>
 # 
