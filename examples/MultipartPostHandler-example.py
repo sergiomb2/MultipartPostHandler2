@@ -13,10 +13,10 @@ def main():
     def validateFile(url):
         temp = tempfile.mkstemp(suffix=".html")
         os.write(temp[0], opener.open(url).read())
-        params = { "ss" : "0",            # show source 
+        params = { "ss" : "0",            # show source
             "doctype" : "Inline", 
             "uploaded_file" : open(temp[1], "rb") }
-        print opener.open(validatorURL, params).read()
+        print(opener.open(validatorURL, params).read())
         os.remove(temp[1])
 
     if len(sys.argv[1:]) > 0:
