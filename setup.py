@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 setup(
     name = "MultipartPostHandler2",
     py_modules = ['MultipartPostHandler'],
-    version = "0.1.4",
+    version = "0.1.5",
     description = "A handler for urllib2 to enable multipart form uploading",
     license = "LGPLv2.1+",
     author = "Will Holcomb",

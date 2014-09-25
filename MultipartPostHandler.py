@@ -106,7 +106,9 @@ class MultipartPostHandler(urllib2.BaseHandler):
             buffer.write('Content-Disposition: form-data; name="%s"' % key)
             if value is None:
                 value = ""
-            buffer.write('\r\n\r\n' + value + '\r\n')
+            # if type(value) is not str, we need str(value) to not error with cannot concatenate 'str'
+            # and 'dict' or 'tuple' or somethingelse objects
+            buffer.write('\r\n\r\n' + str(value) + '\r\n')
         for(key, fd) in files:
             file_size = os.fstat(fd.fileno())[stat.ST_SIZE]
             filename = fd.name.split('/')[-1]
