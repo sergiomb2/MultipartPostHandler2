@@ -104,6 +104,7 @@ class MultipartPostHandler(urllib2.BaseHandler):
         for(key, value) in vars:
             buffer.write('--%s\r\n' % boundary)
             buffer.write('Content-Disposition: form-data; name="%s"' % key)
+            buffer.write('\r\nContent-Type: text/plain; charset=utf-8')
             if value is None:
                 value = ""
             # if type(value) is not str, we need str(value) to not error with cannot concatenate 'str'
@@ -115,7 +116,7 @@ class MultipartPostHandler(urllib2.BaseHandler):
             contenttype = mimetypes.guess_type(filename)[0] or 'application/octet-stream'
             buffer.write('--%s\r\n' % boundary)
             buffer.write('Content-Disposition: form-data; name="%s"; filename="%s"\r\n' % (key, filename))
-            buffer.write('Content-Type: %s\r\n' % contenttype)
+            buffer.write('Content-Type: %s; charset=utf-8\r\n' % contenttype)
             buffer.write('Content-Length: %s\r\n' % file_size)
             fd.seek(0)
             buffer.write('\r\n' + fd.read() + '\r\n')
